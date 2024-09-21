@@ -26,6 +26,17 @@ class filmeController {
             res.status(500).json({message:`${erro} "Erro na criação do filme"` })
         }
     }
+
+    static async modificarFilme (req, res){
+        try{
+            const id = req.params.id;
+            const newData = req.body;
+            await filme.findByIdAndUpdate(id, req.body);
+            res.status(200).json({data: newData})
+        }catch(erro){
+            res.status(500).json({message:`${erro} "Erro na atualização do filme"`})
+        }
+    }
 }
 
 export default filmeController;
