@@ -37,6 +37,16 @@ class filmeController {
             res.status(500).json({message:`${erro} "Erro na atualização do filme"`})
         }
     }
+
+    static async deletarFilme (req, res){
+        try{
+            const id = req.params.id;
+            await filme.findByIdAndDelete(id);
+            res.status(200).json("Filme deletado com Sucesso");
+        }catch(erro){
+            res.status(500).json({message:`${erro} "Erro em deletar o filme"`});
+        }
+    }
 }
 
 export default filmeController;
