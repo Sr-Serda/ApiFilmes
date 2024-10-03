@@ -9,7 +9,7 @@ const validacao = (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
-  next(); //controlador
+  next(); //controladorz
 };
 
 

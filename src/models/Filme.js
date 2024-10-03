@@ -1,12 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 const filmeScheme = new mongoose.Schema({
-    id: { type: mongoose.Schema.Types.ObjectId },
-    categorias: {
-        idCategoria: { type: mongoose.Schema.Types.ObjectId },
-        titulo: String,
-        cor: String,
-    },
+    id: {type: mongoose.Schema.Types.ObjectId},
     titulo: { type: String, required: true },
     descricao: { type: String},
     url: { type: String}
