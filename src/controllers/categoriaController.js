@@ -11,7 +11,7 @@ class categoriaController {
     static async listarCategoriaID (req, res) {
         try{
             const id = req.params.id;
-            const listaCategoriaID = await filme.findById(id, '', { $exists: true, $ne: null } )
+            const listaCategoriaID = await categoria.findById(id, '', { $exists: true, $ne: null } )
             res.status(200).json(listaCategoriaID)
         }catch(erro){
             res.status(500).json({message:`Erro na requisição por categoria ID: ${erro} ` })
