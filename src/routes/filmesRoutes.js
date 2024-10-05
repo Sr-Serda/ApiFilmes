@@ -14,6 +14,7 @@ const validacao = (req, res, next) => {
 
 
 routes.get("/filmes", filmeController.listarFilmes);
+routes.get("/filmes/search", filmeController.listarFilmePorCategoria)
 routes.get("/filmes/:id", filmeController.listarFilmesPorId);
 routes.post("/filmes", validarPostFilmes ,validacao ,filmeController.novoFilme, );
 routes.put("/filmes/:id", filmeController.modificarFilme);

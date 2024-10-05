@@ -1,4 +1,6 @@
+import { categoria } from "../models/Categoria.js";
 import filme  from "../models/Filme.js";
+
 
 class filmeController {
 
@@ -19,11 +21,14 @@ class filmeController {
     }
 
     static async novoFilme (req, res){
+        const novoFilme = req.body
         try{
-        await filme.create(req.body);
-        res.status(201).json({message: "Filme Criado com Sucesso"});
-        }catch(erro){
-            res.status(500).json({message:`${erro} "Erro na criação do filme"` })
+            const categoriaEncontrado = await categoria.findById(novoFilme.categoria);
+            const filmeCompleto = { ...novoFilme, categoria: { ...categoriaEncontrado._doc }};
+            const filmeCriado = await filme.create(filmeCompleto);
+            res.status(201).json({ message: "criado com sucesso", filme: filmeCriado });
+        } catch (erro) {
+          res.status(500).json({ message: `${erro.message} - falha ao cadastrar filme` });
         }
     }
 
@@ -46,6 +51,16 @@ class filmeController {
         }catch(erro){
             res.status(500).json({message:`${erro} "Erro em deletar o filme"`});
         }
+    }
+
+    static async listarFilmePorCategoria(req, res) {
+        const categoria = req.query.categoria;
+        try{
+            const filmePorCategoria = await filme.find({"categoria.titulo": categoria});
+            res.status(200).json(filmePorCategoria);
+        } catch (erro) {
+            res.status(500).json({ message: `${erro.message} - falha na busca` });
+          }
     }
 }
 
