@@ -11,10 +11,7 @@ async function connectDatabase() {
     }
     
     try {
-        await mongoose.connect(connectionString, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(connectionString);
         console.log("Conexão com MongoDB estabelecida com sucesso.");
         return mongoose.connection;
     } catch (error) {
