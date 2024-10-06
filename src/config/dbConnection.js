@@ -1,19 +1,23 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
+let cachedConnection = null;
 
 async function connectDatabase() {
+    if (cachedConnection) {
+        console.log("Usando conexão MongoDB existente.");
+        return cachedConnection;
+    }
+
     const connectionString = process.env.DB_CONNECTION_STRING;
     
     if (!connectionString) {
+        console.error("String de conexão não encontrada.");
         throw new Error("String de conexão com o MongoDB não foi encontrada. Verifique a variável DB_CONNECTION_STRING.");
     }
-    
+
     try {
-        await mongoose.connect(connectionString);
+        console.log("Tentando conectar ao MongoDB...");
+        cachedConnection = await mongoose.connect(connectionString);
         console.log("Conexão com MongoDB estabelecida com sucesso.");
-        return mongoose.connection;
+        return cachedConnection;
     } catch (error) {
         console.error("Erro ao conectar com o MongoDB:", error);
         throw error;
