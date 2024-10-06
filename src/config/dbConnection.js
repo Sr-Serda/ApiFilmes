@@ -4,9 +4,23 @@ import dotenv from "dotenv";
 dotenv.config();
 
 async function connectDatabase() {
-    mongoose.connect(process.env.DB_CONNECTION_STRING);
-    //Conexão com o mongoDB
-    return mongoose.connection;
+    const connectionString = process.env.DB_CONNECTION_STRING;
+    
+    if (!connectionString) {
+        throw new Error("String de conexão com o MongoDB não foi encontrada. Verifique a variável DB_CONNECTION_STRING.");
+    }
+    
+    try {
+        await mongoose.connect(connectionString, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("Conexão com MongoDB estabelecida com sucesso.");
+        return mongoose.connection;
+    } catch (error) {
+        console.error("Erro ao conectar com o MongoDB:", error);
+        throw error;
+    }
 }
 
-export default connectDatabase
+export default connectDatabase;
