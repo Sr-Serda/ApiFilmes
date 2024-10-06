@@ -1,6 +1,12 @@
-let cachedConnection = null;
+import mongoose from "mongoose";  // Certifique-se de que isso está presente
+
+import dotenv from "dotenv";
+
+dotenv.config();
 
 async function connectDatabase() {
+    let cachedConnection = null;
+
     if (cachedConnection) {
         console.log("Usando conexão MongoDB existente.");
         return cachedConnection;
