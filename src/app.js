@@ -1,16 +1,18 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose"; // Importar mongoose
+import mongoose from "mongoose";
 import connectDatabase from "./config/dbConnection.js";
 import routes from "./routes/index.js";
 
 const app = express();
 
-// Ativar CORS
-app.use(cors());
+// Configurar o CORS para permitir todas as origens (em desenvolvimento)
+app.use(cors({ origin: 'http://localhost:3000' }));
+
+
 
 // Conectar ao banco de dados
-await connectDatabase(); // Aguarda a conexão com o banco de dados, mas não usa o retorno
+await connectDatabase();
 
 // Verificar erros e abrir conexão diretamente pelo mongoose.connection
 mongoose.connection.on("error", (erro) => {
