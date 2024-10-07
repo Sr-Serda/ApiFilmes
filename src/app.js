@@ -7,7 +7,7 @@ import routes from "./routes/index.js";
 const app = express();
 
 // Configurar o CORS para permitir todas as origens (em desenvolvimento)
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: '*' }));
 
 
 
