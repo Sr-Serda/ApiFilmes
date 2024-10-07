@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose"; // Importe mongoose para acessar mongoose.connection
+import mongoose from "mongoose"; // Importar mongoose
 import connectDatabase from "./config/dbConnection.js";
 import routes from "./routes/index.js";
 
@@ -10,15 +10,15 @@ const app = express();
 app.use(cors());
 
 // Conectar ao banco de dados
-await connectDatabase(); // Chame a função de conexão, mas não armazene o retorno
+await connectDatabase(); // Aguarda a conexão com o banco de dados, mas não usa o retorno
 
-// Use mongoose.connection para eventos
+// Verificar erros e abrir conexão diretamente pelo mongoose.connection
 mongoose.connection.on("error", (erro) => {
-    console.error("Erro de conexão", erro);
+    console.error("Erro de conexão com o MongoDB:", erro);
 });
 
 mongoose.connection.once("open", () => {
-    console.log("Conexão com o MongoDB estabelecida com sucesso.");
+    console.log("Conexão com MongoDB estabelecida com sucesso.");
 });
 
 // Rotas
