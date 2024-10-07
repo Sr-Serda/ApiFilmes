@@ -7,7 +7,12 @@ import routes from "./routes/index.js";
 const app = express();
 
 // Ativar CORS
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000', // Permitir requisições apenas desta origem
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+  
 
 // Conectar ao banco de dados
 await connectDatabase(); // Aguarda a conexão com o banco de dados, mas não usa o retorno
