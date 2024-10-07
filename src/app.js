@@ -8,7 +8,7 @@ const app = express();
 
 // Ativar CORS
 app.use(cors({
-    origin: 'http://localhost:3000', // Permitir requisições apenas desta origem
+    origin: 'https://serdanoirflix.netlify.app/', // Permitir requisições apenas desta origem
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
   }));
