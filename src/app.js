@@ -8,7 +8,8 @@ const app = express();
 
 // Ativar CORS
 var allowedOrigins = ['http://localhost:3000',
-                      'https://6703f2c540ac100008bd980b--serdanoirflix.netlify.app/'];
+                      'https://6703f2c540ac100008bd980b--serdanoirflix.netlify.app/',
+                        "*"];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
